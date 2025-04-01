@@ -1,0 +1,8 @@
+.container {
+  box-sizing: content-box;
+  padding-left: var(--edge-padding);
+  padding-right: var(--edge-padding);
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+}

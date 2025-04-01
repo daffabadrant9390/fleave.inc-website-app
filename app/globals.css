@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 
-:root {
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -17,9 +17,60 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
-body {
+/* body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+} */
+
+:root {
+  --container-max-width: none;
+}
+
+/**
+ * Responsive starts here. Hardcoding the breakpoints instead of using SCSS so we don’t need a build process
+ * for design-tokens: `base.css` and `variables.css`. Requiring no build process makes it easy to import
+ * these files in local development storybook, Next.js project, etc.
+ *
+ * Tech debt. Could possibly be improved using [custom media queries](https://cssdb.org/#custom-media-queries)
+ *
+ * IMPORTANT: keep values in sync [DUPLICATE_HARDCODED_BREAKPOINTS]
+ */
+
+@media (min-width: 600px) {
+  :root {
+    /* Responsive Container */
+    --edge-padding: 40px;
+  }
+}
+
+@media (min-width: 840px) {
+  :root {
+    /* Responsive container */
+    --container-max-width: 760px;
+  }
+}
+
+@media (min-width: 960px) {
+  :root {
+    /* Responsive Container */
+    --edge-padding: 100px;
+    --container-max-width: none;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    /* Responsive Container */
+    --edge-padding: 120px;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    /* Responsive Container */
+    --edge-padding: 120px;
+    --container-max-width: 1200px;
+  }
 }
