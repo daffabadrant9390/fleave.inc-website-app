@@ -1,0 +1,26 @@
+.navigation_container {
+  --navigation-link-inactive: #2e6060;
+  --navigation-link-active: #285353;
+  --navigation-link-hover-state: #074848;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 20px;
+
+  .navigation_link_item {
+    color: var(--navigation-link-inactive);
+    font-weight: 400;
+    cursor: pointer;
+    transition: hover 0.4s ease-in-out;
+
+    &:hover {
+      color: var(--navigation-link-hover-state);
+    }
+
+    &.active_link_item {
+      color: var(--navigation-link-active);
+      font-weight: 700;
+    }
+  }
+}
