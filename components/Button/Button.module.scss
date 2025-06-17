@@ -1,0 +1,161 @@
+.button_container {
+  --button-height: auto;
+  --button-vertical-padding: 8px;
+  --button-horizontal-padding: 16px;
+  --button-min-width: 84px;
+  --button-border-radius: 6px;
+
+  font-size: var(--font-size-b2);
+  line-height: var(--line-height-b2);
+  height: var(--button-height);
+  padding-top: var(--button-vertical-padding);
+  padding-bottom: var(--button-vertical-padding);
+  min-width: var(--button-min-width);
+  cursor: pointer;
+  font-weight: var(--font-weight-bold);
+  position: relative;
+  z-index: 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  text-align: center;
+  text-decoration: none;
+  border-radius: var(--button-border-radius);
+  box-sizing: border-box;
+  word-break: break-word;
+  transition: all 0.4s ease-in-out;
+
+  // will be set by variant modifiers
+  outline: none;
+  border: none;
+  background-color: transparent;
+
+  &:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: -3px;
+  }
+
+  // setup for two layers. ::before is the lower layer while ::after is the top bg layer
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &::before {
+    z-index: -2;
+  }
+
+  &::after {
+    z-index: -1;
+    opacity: 0;
+    transition: 0.3s;
+  }
+}
+
+.size_large {
+  --button-height: auto;
+  --button-vertical-padding: 13px;
+  --button-horizontal-padding: 20px;
+  --button-min-width: 112px;
+  --button-border-radius: 8px;
+  --icon-margin-right: 8px;
+  --icon-dimension: 20px;
+
+  font-size: var(--font-size-b1);
+  line-height: var(--line-height-b1);
+}
+
+.size_small {
+  --button-height: auto;
+  --button-vertical-padding: 8px;
+  --button-horizontal-padding: 12px;
+  --button-min-width: 64px;
+  --button-border-radius: 6px;
+  --icon-margin-right: 4px;
+  --icon-dimension: 12px;
+
+  font-size: var(--font-size-b3);
+  line-height: var(--line-height-b3);
+}
+
+.variant {
+  &_primary {
+    color: #ffffff;
+    background-color: #1a4848;
+
+    &:hover {
+      background-color: #113f3f;
+    }
+  }
+
+  &_secondary {
+    color: #ffffff;
+    background-color: #f59f00;
+
+    &:hover {
+      background-color: #e49400;
+    }
+  }
+
+  &_tertiary {
+    color: #ffffff;
+    background-color: #cc0000;
+
+    &:hover {
+      background-color: #b20000;
+    }
+  }
+}
+
+.full_width {
+  width: 100%;
+}
+
+.horizontal_padding {
+  padding-left: var(--button-horizontal-padding);
+  padding-right: var(--button-horizontal-padding);
+}
+
+// NOTE: Desktop version
+@media screen and (min-width: 840px) {
+  .button {
+    --button-height: 44px;
+    --button-vertical-padding: initial;
+    --button-horizontal-padding: 20px;
+    --button-min-width: 104px;
+    --button-border-radius: 8px;
+    --icon-margin-right: 8px;
+    --icon-dimension: 20px;
+
+    // only enable max 1 line on desktop viewport
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .size_large {
+    --button-height: 52px;
+    --button-vertical-padding: initial;
+    --button-horizontal-padding: 24px;
+    --button-min-width: 120px;
+    --button-border-radius: 8px;
+    --icon-margin-right: 8px;
+    --icon-dimension: 20px;
+  }
+
+  .size_small {
+    --button-height: 32px;
+    --button-vertical-padding: initial;
+    --button-horizontal-padding: 16px;
+    --button-min-width: 88px;
+    --button-border-radius: 6px;
+    --icon-margin-right: 4px;
+    --icon-dimension: 16px;
+  }
+}

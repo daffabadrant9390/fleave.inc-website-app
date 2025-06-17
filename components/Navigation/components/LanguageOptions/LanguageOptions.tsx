@@ -59,6 +59,7 @@ export const LanguageOptions = () => {
 
           return (
             <div
+              key={`language-option-${languageItem.title}`}
               className={cx(
                 styles.selected_language_container,
                 styles.with_hover_state

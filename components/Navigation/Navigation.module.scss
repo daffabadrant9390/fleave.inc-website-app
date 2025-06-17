@@ -15,28 +15,37 @@
   position: relative;
   object-fit: cover;
   object-position: center;
+  order: 1;
+}
+
+.navigation_right_section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 6px;
+  order: 2;
+
+  @media screen and (min-width: 840px) {
+    column-gap: 24px;
+  }
 }
 
 .contact_us_language_option {
   display: flex;
   flex-direction: row;
   align-items: center;
-  column-gap: 16px;
+  column-gap: 12px;
+  order: 1;
 
-  .contact_us_btn {
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-    padding: 12px 24px;
-    color: #ffffff;
-    font-weight: 600;
-    background-color: #285353;
-    font-size: 16px;
+  @media screen and (min-width: 840px) {
+    order: 2;
+  }
+}
 
-    transition: hover 0.5s ease-in-out;
+.navigation_links_section {
+  order: 2;
 
-    &:hover {
-      background-color: #1a4848;
-    }
+  @media screen and (min-width: 840px) {
+    order: 1;
   }
 }

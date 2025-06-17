@@ -27,17 +27,10 @@ const DEFAULT_VALUE_DEVICE_TYPE_DATA: DeviceTypeData = {
 
 const DESKTOP_MIN_INNER_WIDTH = 840; // Standard screen size for desktop screen
 
-const generateClientDeviceType = () => {
-  // NOTE: 'desktop' will be used as the fallback value for CSR and
-  //        (somehow) inaccesible window?.innerWidth.
-  if (typeof window !== 'undefined') {
-    const currentScreenWidth = window?.innerWidth || DESKTOP_MIN_INNER_WIDTH;
-    return currentScreenWidth >= DESKTOP_MIN_INNER_WIDTH
-      ? DEVICE_TYPE.DESKTOP
-      : DEVICE_TYPE.MOBILE;
-  }
-
-  return DEVICE_TYPE.DESKTOP;
+const generateClientDeviceType = (screenWidth: number) => {
+  return screenWidth >= DESKTOP_MIN_INNER_WIDTH
+    ? DEVICE_TYPE.DESKTOP
+    : DEVICE_TYPE.MOBILE;
 };
 
 const DeviceTypeContext = createContext<DeviceTypeData>(
@@ -51,7 +44,6 @@ export const DeviceTypeContextProvider = ({
   children: ReactNode;
   isDesktop: boolean;
 }) => {
-  // State for DeviceTypeData
   const [deviceTypeDataState, setDeviceTypeDataState] =
     useState<DeviceTypeData>(
       isDesktop
@@ -60,35 +52,54 @@ export const DeviceTypeContextProvider = ({
     );
 
   useEffect(() => {
-    let resizeObserver: ResizeObserver;
+    const handleResize = () => {
+      if (typeof window === 'undefined') return;
 
-    if (typeof window !== 'undefined' && 'ResizeObserver' in window) {
-      resizeObserver = new ResizeObserver(([entry]) => {
-        if (entry && entry.contentRect && entry.contentRect.width) {
-          const clientDeviceType = generateClientDeviceType();
+      const currentWidth =
+        document.documentElement.clientWidth || DESKTOP_MIN_INNER_WIDTH;
 
-          setDeviceTypeDataState(
-            clientDeviceType === DEVICE_TYPE.DESKTOP
-              ? {
-                  deviceType: DEVICE_TYPE.DESKTOP,
-                  isDesktop: true,
-                  isMobile: false,
-                }
-              : {
-                  deviceType: DEVICE_TYPE.MOBILE,
-                  isDesktop: false,
-                  isMobile: true,
-                }
-          );
-        }
-      });
+      const clientDeviceType = generateClientDeviceType(currentWidth);
 
-      resizeObserver.observe(document.body);
+      setDeviceTypeDataState(
+        clientDeviceType === DEVICE_TYPE.DESKTOP
+          ? {
+              deviceType: DEVICE_TYPE.DESKTOP,
+              isDesktop: true,
+              isMobile: false,
+            }
+          : {
+              deviceType: DEVICE_TYPE.MOBILE,
+              isDesktop: false,
+              isMobile: true,
+            }
+      );
+    };
 
-      return () => {
-        resizeObserver.unobserve(document.body);
-      };
+    // Initial check
+    if (typeof window !== 'undefined') {
+      handleResize();
     }
+
+    // Add both resize and orientationchange listeners
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', handleResize);
+      window.addEventListener('orientationchange', handleResize);
+
+      // Also listen for visualViewport changes if available
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', handleResize);
+      }
+    }
+
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', handleResize);
+        window.removeEventListener('orientationchange', handleResize);
+        if (window.visualViewport) {
+          window.visualViewport.removeEventListener('resize', handleResize);
+        }
+      }
+    };
   }, []);
 
   return (

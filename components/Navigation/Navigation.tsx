@@ -5,9 +5,26 @@ import { Container } from '../Container/Container';
 import Image from 'next/image';
 import { NavigationLinks } from './components/NavigationLinks/NavigationLinks';
 import { LanguageOptions } from './components/LanguageOptions/LanguageOptions';
+import { Button } from '../Button/Button';
+import { useRouter } from 'next/navigation';
+import { NAVIGATION_DATA } from '@/lib/data/navigation';
+import { DesktopNavigationLinks } from './components/NavigationLinks/desktop/DesktopNavigationLinks';
+import { MobileNavigationLinks } from './components/NavigationLinks/mobile/MobileNavigationLinks';
+import { useEffect, useState } from 'react';
 
 export const Navigation = () => {
   const { isDesktop } = useDeviceType();
+  const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+
+  // Only render after component is mounted to prevent hydration issues
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null; // or a loading skeleton
+  }
 
   return (
     <Container>
@@ -26,16 +43,26 @@ export const Navigation = () => {
           //   transition: '0.3s',
           // }}
         />
-        {isDesktop && <NavigationLinks />}
-        <div className={styles.contact_us_language_option}>
-          <LanguageOptions />
-          {isDesktop && (
-            <button type="button" className={styles.contact_us_btn}>
-              Contact Us
-            </button>
-          )}
-
-          {!isDesktop && <NavigationLinks />}
+        <div className={styles.navigation_right_section}>
+          <div className={styles.navigation_links_section}>
+            {isDesktop ? (
+              <DesktopNavigationLinks navigationLinksData={NAVIGATION_DATA} />
+            ) : (
+              <MobileNavigationLinks navigationLinksData={NAVIGATION_DATA} />
+            )}
+          </div>
+          <div className={styles.contact_us_language_option}>
+            <LanguageOptions />
+            {isDesktop && (
+              <Button
+                onClick={() => router.push('/contact-us')}
+                size="regular"
+                variant="primary"
+              >
+                Contact Us
+              </Button>
+            )}
+          </div>
         </div>
       </section>
     </Container>
