@@ -1,4 +1,4 @@
-import { useDeviceType } from '@/hooks/useDeviceType';
+import { useDeviceType } from '@/lib/hooks/useDeviceType';
 import dynamic from 'next/dynamic';
 import { DesktopNavigationLinksProps } from './desktop/DesktopNavigationLinks';
 import { MobileNavigationLinksProps } from './mobile/MobileNavigationLinks';

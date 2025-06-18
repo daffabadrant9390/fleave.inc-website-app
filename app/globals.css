@@ -61,15 +61,18 @@
   --line-height-b2: var(--line-height-mobile-b2-px);
   --font-size-b3: var(--font-size-mobile-b3-px);
   --line-height-b3: var(--line-height-mobile-b3-px);
+
+  /* Color */
+  --color-primary: #285353;
+  --color-neutral: #303135;
 }
 
 body {
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  overflow: hidden;
 }
 
 /**
- * Responsive starts here. Hardcoding the breakpoints instead of using SCSS so we don’t need a build process
+ * Responsive starts here. Hardcoding the breakpoints instead of using SCSS so we don't need a build process
  * for design-tokens: `base.css` and `variables.css`. Requiring no build process makes it easy to import
  * these files in local development storybook, Next.js project, etc.
  *

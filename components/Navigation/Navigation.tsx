@@ -1,5 +1,5 @@
 'use client';
-import { useDeviceType } from '@/hooks/useDeviceType';
+import { useDeviceType } from '@/lib/hooks/useDeviceType';
 import styles from './Navigation.module.scss';
 import { Container } from '../Container/Container';
 import Image from 'next/image';

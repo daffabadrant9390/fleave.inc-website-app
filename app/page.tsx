@@ -3,7 +3,10 @@
 import { Container } from '@/components/Container/Container';
 import { HeroSection } from '@/components/LandingPage/HeroSection/HeroSection';
 import { Navigation } from '@/components/Navigation/Navigation';
-import { useDeviceType } from '@/hooks/useDeviceType';
+import { useDeviceType } from '@/lib/hooks/useDeviceType';
+
+import styles from './page.module.scss';
+import { AboutUsSection } from '@/components/LandingPage/AboutUsSection/AboutUsSection';
 
 export default function Home() {
   // Get the screen state (desktop or mobile)
@@ -13,10 +16,8 @@ export default function Home() {
     <main>
       <Navigation />
       <HeroSection />
-      <Container>
-        <h1 className="text-red-600 font-bold hover:text-blue-600 transition-all duration-150">
-          Hello World
-        </h1>
+      <Container className={styles.main_content_section}>
+        <AboutUsSection />
       </Container>
     </main>
   );

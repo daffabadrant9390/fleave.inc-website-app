@@ -55,9 +55,9 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  column-gap: 14px;
+  column-gap: 12px;
 
   @media screen and (min-width: 840px) {
-    column-gap: 24px;
+    column-gap: 16px;
   }
 }

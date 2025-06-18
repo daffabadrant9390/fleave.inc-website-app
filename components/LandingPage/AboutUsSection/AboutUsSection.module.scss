@@ -1,0 +1,129 @@
+.about_us_section {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 24px;
+  padding: 40px 0;
+
+  @media screen and (min-width: 840px) {
+    row-gap: 40px;
+    padding: 80px 0;
+  }
+}
+
+.main_content_wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  row-gap: 16px;
+
+  @media screen and (min-width: 840px) {
+    flex-direction: row;
+    justify-content: center;
+    row-gap: 0px;
+    column-gap: 32px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    column-gap: 40px;
+  }
+
+  @media screen and (min-width: 1400px) {
+    column-gap: 52px;
+  }
+}
+
+.description_content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 20px;
+  font-size: var(--font-size-b2);
+
+  .description_text {
+    color: var(--color-neutral);
+    max-width: 100%;
+
+    @media screen and (min-width: 840px) {
+      max-width: 480px;
+    }
+
+    @media screen and (min-width: 1200px) {
+      max-width: 520px;
+    }
+  }
+}
+
+.image_content {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  height: 250px;
+  border-radius: 12px;
+  overflow: hidden;
+
+  @media screen and (min-width: 840px) {
+    height: 280px;
+    max-width: 360px;
+    min-width: 250px;
+  }
+
+  @media screen and (min-width: 1100px) {
+    max-width: 420px;
+    min-width: 300px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    height: 340px;
+    max-width: 500px;
+    min-width: 400px;
+  }
+}
+
+.flower_image_1_wrapper {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  flex-shrink: 0;
+  top: 20px;
+  left: -80px;
+  opacity: 0.9;
+  z-index: -1;
+
+  @media screen and (min-width: 600px) {
+    left: -100px;
+  }
+
+  @media screen and (min-width: 840px) {
+    width: 400px;
+    height: 400px;
+    top: 0px;
+    left: -180px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    left: -200px;
+  }
+}
+
+.flower_image_2_wrapper {
+  position: absolute;
+  flex-shrink: 0;
+  width: 200px;
+  height: 200px;
+  top: calc(var(--bottom-y-position-image-content) - 280px + 180px);
+  right: -40px;
+  z-index: -1;
+  opacity: 0.75;
+
+  @media screen and (min-width: 840px) {
+    width: 300px;
+    height: 280px;
+    top: calc(var(--bottom-y-position-image-content) - 280px + 120px);
+    right: -80px;
+  }
+}

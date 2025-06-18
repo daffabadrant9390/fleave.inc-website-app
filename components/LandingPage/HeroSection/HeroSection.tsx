@@ -1,4 +1,4 @@
-import { useDeviceType } from '@/hooks/useDeviceType';
+import { useDeviceType } from '@/lib/hooks/useDeviceType';
 import styles from './HeroSection.module.scss';
 import Image from 'next/image';
 import { ResponsiveImage } from '@/components/ResponsiveImage/ResponsiveImage';
